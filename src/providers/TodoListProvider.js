@@ -37,6 +37,19 @@ const TodoListProvider = ({ children }) => {
             return item;
         })
         setTodoList(newTodoList)
+        localStorage.setItem('todoList', JSON.stringify(newTodoList))
+    }
+
+    const editTodo = (todo) => {
+     
+        const newTodoList = todoList.map((item, index) => {
+            if (index === todo) {
+                console.log('Edit todo', todo, item)
+                item.isEditing = !item.isEditing
+            }
+            return item;
+        })
+        setTodoList(newTodoList)
     }
 
     const clearTodos = () => {
@@ -62,7 +75,8 @@ const TodoListProvider = ({ children }) => {
         updateTodo,
         removeTodo,
         clearTodos,
-        sortTodos
+        sortTodos,
+        editTodo
     }
 
     return (<TodoContext.Provider value={contextValue}>{children}</TodoContext.Provider>)
