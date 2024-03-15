@@ -27,7 +27,7 @@ export const AddTodoForm = ({ classname }) => {
                 placeholder='Add Todo'
                 value={newTodo.todo}
                 name={'todo'}
-                className={styles['todo-input']}
+                className={styles.todoInput}
                 onChange={onChangeTodoInput}
             ></input>
             <input
@@ -35,7 +35,7 @@ export const AddTodoForm = ({ classname }) => {
                 placeholder='Add Status'
                 value={newTodo.status}
                 name={'status'}
-                className={styles['todo-input']}
+                className={styles.todoInput}
                 onChange={onChangeTodoInput}
             ></input>
             <input
@@ -43,11 +43,11 @@ export const AddTodoForm = ({ classname }) => {
                 placeholder='Add Priority'
                 value={newTodo.priority}
                 name={'priority'}
-                className={styles['todo-input']}
+                className={styles.todoInput}
                 onChange={onChangeTodoInput}
             ></input>
             <button
-                className='todo-submit'
+                className={styles.todoSubmit}
             >Add Todo</button>
         </form>)
 }

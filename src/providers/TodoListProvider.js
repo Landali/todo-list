@@ -3,15 +3,15 @@ const { createContext, useState, useContext } = require("react");
 const TodoContext = createContext();
 
 const defaultTodoState = [
-    { todo: 'My first todo', status: 'Pending', priority: 'Low' },
-    { todo: 'My first todo 2', status: 'Pending', priority: 'High' },
+    { todo: 'My first todo', status: 'pending', priority: 'low' },
+    { todo: 'My first todo 2', status: 'pending', priority: 'high' },
 ]
 
 const TodoListProvider = ({ children }) => {
 
     let mytodoList = localStorage.getItem('todoList')
     mytodoList = JSON.parse(mytodoList)
-    
+
     const [todoList, setTodoList] = useState(mytodoList || defaultTodoState)
 
     const getNumberTodos = () => todoList.length

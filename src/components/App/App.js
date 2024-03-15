@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 import { useTodoListContext } from 'providers/TodoListProvider';
-import { TodoList } from 'components';
+import { Todo } from 'components';
 
 
 export const App = () => {
@@ -13,8 +13,8 @@ export const App = () => {
 
   return (
     <div className={styles.main} >
-      <TodoList list={todoList} addTodo={addTodo}>
-      </TodoList>
+      <Todo list={todoList} addTodo={addTodo}/>
+
     </div>
   );
 }
