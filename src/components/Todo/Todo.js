@@ -8,7 +8,7 @@ export const Todo = ({ list, addTodo }) => {
     return (
         <div className={styles.main}>
             <h1 className={styles.todoTitle}>My Todo List</h1>
-            <AddTodoForm></AddTodoForm>
+            <AddTodoForm addTodo={addTodo}/>
             <TodoList list={list} addTodo={addTodo}></TodoList>
         </div>
     )

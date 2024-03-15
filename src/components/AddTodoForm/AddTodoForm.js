@@ -1,26 +1,25 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
 
-export const AddTodoForm = ({ classname }) => {
-
-    const [newTodo, setNewTodo] = useState({ todo: '', status: '', priority: '' })
+export const AddTodoForm = ({ classname, addTodo }) => {
+    const defaultTodo = { todo: '', status: '', priority: '' }
+    const [newTodo, setNewTodo] = useState(defaultTodo)
 
 
     const onChangeTodoInput = (e) => {
-        console.log('event on change', e.target.id);
-       // setTodoItem({ ...todoItem, [e.target.id]: e.target.value })
+        setNewTodo({ ...newTodo, [e.target.name]: e.target.value })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-       // console.log('Todo to submit: ', todoItem)
-        // addTodo(todoItem)
+        addTodo(newTodo)
+        setNewTodo(defaultTodo)
     }
 
     return (
-        <form 
-        className={`${styles[classname]} ${styles.main}}`}
-        onSubmit={handleSubmit}
+        <form
+            className={`${styles[classname]} ${styles.main}}`}
+            onSubmit={handleSubmit}
         >
             <input
                 type='text'
