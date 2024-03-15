@@ -9,7 +9,8 @@ export const Todo = ({ list, addTodo, updateTodo, deleteTodo, editTodo }) => {
         <div className={styles.main}>
             <h1 className={styles.todoTitle}>My Todo List</h1>
             <AddTodoForm addTodo={addTodo} />
-            <TodoList list={list} deleteTodo={deleteTodo} editTodo={editTodo} />
+            <hr/>
+            <TodoList list={list} deleteTodo={deleteTodo} editTodo={editTodo} updateTodo={updateTodo} />
         </div>
     )
 }

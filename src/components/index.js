@@ -1,4 +1,5 @@
 export * from './App'
+export * from './Todo'
 export * from './TodoList'
 export * from './AddTodoForm'
-export * from './Todo'
+export * from './EditTodoForm'

@@ -29,10 +29,10 @@ const TodoListProvider = ({ children }) => {
         localStorage.setItem('todoList', JSON.stringify(newTodoList))
     }
 
-    const updateTodo = (todo) => {
+    const updateTodo = (todo, todoIndex) => {
         const newTodoList = todoList.map((item, index) => {
-            if (index === todo.id) {
-                item.priority = todo.priority
+            if (index === todoIndex) {
+                item = todo
             }
             return item;
         })
