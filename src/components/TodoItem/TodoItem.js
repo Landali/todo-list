@@ -8,7 +8,7 @@ export const TodoItem = ({ status, todo, priority, editTodo, deleteTodo, index, 
 
     return (
         <div className={styles.main}>
-            <p className={styles[todo.status]} onClick={labelOnClick}>{todo} / {status} / {priority}</p>
+            <p className={styles[status]} onClick={labelOnClick}>{todo} / {status} / {priority}</p>
             <div>
                 <FontAwesomeIcon className={styles.editTodo} icon={faPenToSquare} onClick={() => editTodo(index)} />
                 <FontAwesomeIcon className={styles.deleteTodo} icon={faTrash} onClick={() => deleteTodo(index)} />

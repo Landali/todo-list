@@ -40,7 +40,6 @@ const TodoListProvider = ({ children }) => {
 
     const removeTodo = (todo) => {
         const newTodoList = todoList.filter((_, index) => index !== todo)
-        console.log('Todo deleted: ', newTodoList)
         setTodoList(newTodoList)
         localStorage.setItem('todoList', JSON.stringify(newTodoList))
     }

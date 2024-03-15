@@ -24,17 +24,43 @@ const formInputs = [
     }
 ]
 
+const validateStatus = (value) => {
+    const regex = /(?:pending\b|complete\b)/g
+    if (!regex.test(value)) {
+        return false
+    }
+    return true
+}
+
+const validatePriority = (value) => {
+    const regex = /(?:high\b|low\b|medium\b)/g
+    if (!regex.test(value)) {
+        return false
+    }
+    return true
+}
+
 export const EditTodoForm = ({ classname, updateTodo, todo, index, buttonText }) => {
     const [newTodo, setNewTodo] = useState(todo)
-
+    const [error, setError] = useState('')
 
     const onChangeTodoInput = (e) => {
-        setNewTodo({ ...newTodo, [e.target.name]: e.target.value })
+        if (e.target.name === 'todo') {
+            setNewTodo({ ...newTodo, [e.target.name]: e.target.value })
+        } else {
+            setNewTodo({ ...newTodo, [e.target.name]: e.target.value.toLowerCase() })
+        }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        updateTodo({ ...newTodo, isEditing: false }, index)
+        const validPriority = validatePriority(newTodo.priority)
+        const validStatus = validateStatus(newTodo.status)
+        if (!validPriority || !validStatus) {
+            setError(!validPriority ? 'Priority values allowed: low/medium/high' : 'Status Values allowed: pending/completed')
+        } else {
+            updateTodo({ ...newTodo, isEditing: false }, index)
+        }
     }
 
     return (
@@ -42,6 +68,7 @@ export const EditTodoForm = ({ classname, updateTodo, todo, index, buttonText })
             className={`${styles[classname]} ${styles.main}}`}
             onSubmit={handleSubmit}
         >
+             <h4 className={styles.error}>{error}</h4>
             {formInputs.map((input) =>
                 <Input
                     name={input.name}
