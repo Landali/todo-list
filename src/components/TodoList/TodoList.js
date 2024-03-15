@@ -14,7 +14,7 @@ export const TodoList = ({ list, deleteTodo, editTodo, updateTodo }) => {
                     <EditTodoForm classname={'form'} updateTodo={updateTodo} todo={todo} index={index} buttonText={'Edit Todo'}/>
                 ) : (
                 <div className={styles.myTodo}>
-                    <p className={styles[todo.status]} onClick={(e) => console.log(e)}>{todo.todo}</p>
+                    <p className={styles[todo.status]} onClick={(e) => console.log(e)}>{todo.todo} / {todo.status} / {todo.priority}</p>
                     <div>
                         <FontAwesomeIcon className={styles.editTodo} icon={faPenToSquare} onClick={() => editTodo(index)} />
                         <FontAwesomeIcon className={styles.deleteTodo} icon={faTrash} onClick={() => deleteTodo(index)} />
