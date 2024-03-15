@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
+import { Button } from 'components'
 
 export const AddTodoForm = ({ classname, addTodo }) => {
-    const defaultTodo = { todo: '', status: '', priority: '' }
+    const defaultTodo = { todo: '', status: '', priority: '', isEditing: false }
     const [newTodo, setNewTodo] = useState(defaultTodo)
 
 
@@ -45,8 +46,6 @@ export const AddTodoForm = ({ classname, addTodo }) => {
                 className={styles.todoInput}
                 onChange={onChangeTodoInput}
             ></input>
-            <button
-                className={styles.todoSubmit}
-            >Add Todo</button>
+            <Button classname={'todoSubmit'} text={'Add Todo'}/>
         </form>)
 }

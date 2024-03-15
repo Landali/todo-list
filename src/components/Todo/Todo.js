@@ -1,13 +1,13 @@
 import styles from './styles.module.css'
-import { AddTodoForm } from 'components/AddTodoForm'
-import { TodoList } from 'components/TodoList'
+import { Button, TodoList, AddTodoForm } from 'components'
+
 
 
 export const Todo = ({ list, addTodo, updateTodo, deleteTodo, editTodo, clearTodos }) => {
-    console.log('my list', list)
+
     return (
         <div className={styles.main}>
-            <h1 className={styles.todoTitle}>My Todo List <button onClick={clearTodos} className={styles.deleteAllBtn}>Clear Todo List</button></h1>
+            <h1 className={styles.todoTitle}>My Todo List <Button classname={'deleteAllBtn'} text={'Clear Todo List'} onClick={clearTodos} /></h1>
             <AddTodoForm addTodo={addTodo} />
             <hr />
             <TodoList list={list} deleteTodo={deleteTodo} editTodo={editTodo} updateTodo={updateTodo} />
