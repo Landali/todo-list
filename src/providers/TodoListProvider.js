@@ -9,12 +9,16 @@ const defaultTodoState = [
 
 const TodoListProvider = ({ children }) => {
 
-    const [todoList, setTodoList] = useState(defaultTodoState)
+    let mytodoList = localStorage.getItem('todoList')
+    mytodoList = JSON.parse(mytodoList)
+    
+    const [todoList, setTodoList] = useState(mytodoList || defaultTodoState)
 
     const getNumberTodos = () => todoList.length
 
     const addTodo = (newTodo) => {
         setTodoList([...todoList, newTodo]);
+        localStorage.setItem('todoList', JSON.stringify([...todoList, newTodo]))
     }
 
     const removeTodo = (todo) => {
