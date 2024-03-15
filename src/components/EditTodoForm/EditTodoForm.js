@@ -1,7 +1,30 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
+import { Button, Input } from 'components'
 
-export const EditTodoForm = ({classname, updateTodo, todo, index, buttonText }) => {
+
+const formInputs = [
+    {
+        classname: 'todoInput',
+        type: 'text',
+        placeholder: 'Add Todo',
+        name: 'todo'
+    },
+    {
+        classname: 'todoInput',
+        type: 'text',
+        placeholder: 'Add Status',
+        name: 'status'
+    },
+    {
+        classname: 'todoInput',
+        type: 'text',
+        placeholder: 'Add Priority',
+        name: 'priority'
+    }
+]
+
+export const EditTodoForm = ({ classname, updateTodo, todo, index, buttonText }) => {
     const [newTodo, setNewTodo] = useState(todo)
 
 
@@ -19,32 +42,16 @@ export const EditTodoForm = ({classname, updateTodo, todo, index, buttonText }) 
             className={`${styles[classname]} ${styles.main}}`}
             onSubmit={handleSubmit}
         >
-            <input
-                type='text'
-                placeholder='Add Todo'
-                value={newTodo.todo}
-                name={'todo'}
-                className={styles.todoInput}
-                onChange={onChangeTodoInput}
-            ></input>
-            <input
-                type='text'
-                placeholder='Add Status'
-                value={newTodo.status}
-                name={'status'}
-                className={styles.todoInput}
-                onChange={onChangeTodoInput}
-            ></input>
-            <input
-                type='text'
-                placeholder='Add Priority'
-                value={newTodo.priority}
-                name={'priority'}
-                className={styles.todoInput}
-                onChange={onChangeTodoInput}
-            ></input>
-            <button
-                className={styles.todoSubmit}
-            >{buttonText}</button>
+            {formInputs.map((input) =>
+                <Input
+                    name={input.name}
+                    placeholder={input.placeholder}
+                    classname={input.classname}
+                    type={input}
+                    value={newTodo[input.name]}
+                    onChange={onChangeTodoInput}
+                />
+            )}
+            <Button classname={'todoSubmit'} text={buttonText} />
         </form>)
 }
