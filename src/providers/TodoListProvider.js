@@ -7,22 +7,38 @@ const defaultTodoState = [
     { todo: 'My first todo 2', status: 'pending', priority: 'high', isEditing: false },
 ]
 
+
+const sortTodos = (todos, sortby) => {
+    let sortedTodos = todos || [];
+    const order = {
+        low: ['low', 'medium', 'high'],
+        high: ['high', 'medium', 'low']
+    }
+    if (sortedTodos.length > 1) {
+        sortedTodos = todos.sort((a, b) => order[sortby].indexOf(a.priority) - order[sortby].indexOf(b.priority))
+        return sortedTodos
+    }
+    return sortedTodos
+
+}
+
 const TodoListProvider = ({ children }) => {
 
     let mytodoList = localStorage.getItem('todoList')
     mytodoList = JSON.parse(mytodoList)
+    mytodoList = sortTodos(mytodoList,'high')
 
     const [todoList, setTodoList] = useState(mytodoList || defaultTodoState)
 
     const getNumberTodos = () => todoList.length
 
     const addTodo = (newTodo) => {
-        setTodoList([...todoList, newTodo]);
-        localStorage.setItem('todoList', JSON.stringify([...todoList, newTodo]))
+        const newSortedTodo = sortTodos([...todoList, newTodo], 'high') 
+        setTodoList(newSortedTodo);
+        localStorage.setItem('todoList', JSON.stringify(newSortedTodo))
     }
 
     const removeTodo = (todo) => {
-        console.log('deleting todo')
         const newTodoList = todoList.filter((_, index) => index !== todo)
         console.log('Todo deleted: ', newTodoList)
         setTodoList(newTodoList)
@@ -36,15 +52,15 @@ const TodoListProvider = ({ children }) => {
             }
             return item;
         })
-        setTodoList(newTodoList)
-        localStorage.setItem('todoList', JSON.stringify(newTodoList))
+        const sortedUpdatedTodo = sortTodos(newTodoList, 'high')
+        setTodoList(sortedUpdatedTodo)
+        localStorage.setItem('todoList', JSON.stringify(sortedUpdatedTodo))
     }
 
     const editTodo = (todo) => {
      
         const newTodoList = todoList.map((item, index) => {
             if (index === todo) {
-                console.log('Edit todo', todo, item)
                 item.isEditing = !item.isEditing
             }
             return item;
@@ -57,17 +73,7 @@ const TodoListProvider = ({ children }) => {
         localStorage.removeItem('todoList')
     }
 
-    const sortTodos = (sortby) => {
-        let sortedTodos = [];
-        const order = {
-            low: ['low', 'medium', 'high'],
-            high: ['high', 'medium', 'low']
-        }
-        if (todoList.length > 1) {
-            sortedTodos = todoList.sort((a, b) => order[sortby].indexOf(a.priority) - order[sortby].indexOf(b.priority))
-            setTodoList(sortedTodos)
-        }
-    }
+
 
     const contextValue = {
         todoList,
@@ -76,7 +82,6 @@ const TodoListProvider = ({ children }) => {
         updateTodo,
         removeTodo,
         clearTodos,
-        sortTodos,
         editTodo
     }
 
