@@ -3,8 +3,8 @@ const { createContext, useState, useContext } = require("react");
 const TodoContext = createContext();
 
 const defaultTodoState = [
-    { todo: 'My first todo', status: 'pending', priority: 'low' },
-    { todo: 'My first todo 2', status: 'pending', priority: 'high' },
+    { todo: 'My first todo', status: 'pending', priority: 'low', isEditing: false },
+    { todo: 'My first todo 2', status: 'pending', priority: 'high', isEditing: false },
 ]
 
 const TodoListProvider = ({ children }) => {
@@ -22,8 +22,11 @@ const TodoListProvider = ({ children }) => {
     }
 
     const removeTodo = (todo) => {
+        console.log('deleting todo')
         const newTodoList = todoList.filter((_, index) => index !== todo)
+        console.log('Todo deleted: ', newTodoList)
         setTodoList(newTodoList)
+        localStorage.setItem('todoList', JSON.stringify(newTodoList))
     }
 
     const updateTodo = (todo) => {

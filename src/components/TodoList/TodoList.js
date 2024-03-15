@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export const TodoList = ({ list, addTodo }) => {
+export const TodoList = ({ list, updateTodo, deleteTodo }) => {
 
     return (
         <div className={styles.main} >
@@ -13,8 +13,8 @@ export const TodoList = ({ list, addTodo }) => {
                     <div className={styles.myTodo}>
                         <p className={styles[todo.status]} onClick={(e) => console.log(e)}>{todo.todo}</p>
                         <div>
-                            <FontAwesomeIcon className={styles.editTodo} icon={faPenToSquare} onClick={() => console.log(todo)} />
-                            <FontAwesomeIcon className={styles.deleteTodo} icon={faTrash} onClick={() => console.log(todo)} />
+                            <FontAwesomeIcon className={styles.editTodo} icon={faPenToSquare} onClick={() => deleteTodo(index)} />
+                            <FontAwesomeIcon className={styles.deleteTodo} icon={faTrash} onClick={() => deleteTodo(index)} />
                         </div>
                     </div>
                 )
