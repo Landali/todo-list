@@ -54,6 +54,7 @@ const TodoListProvider = ({ children }) => {
 
     const clearTodos = () => {
         setTodoList([])
+        localStorage.removeItem('todoList')
     }
 
     const sortTodos = (sortby) => {

@@ -5,7 +5,7 @@ import { Todo } from 'components';
 
 export const App = () => {
 
-  const { todoList, addTodo, updateTodo, removeTodo, editTodo } = useTodoListContext();
+  const { todoList, addTodo, updateTodo, removeTodo, editTodo, clearTodos } = useTodoListContext();
 
   console.log('My initial context state: ', {
     todoList
@@ -13,7 +13,7 @@ export const App = () => {
 
   return (
     <div className={styles.main} >
-      <Todo list={todoList} addTodo={addTodo} updateTodo={updateTodo} deleteTodo={removeTodo} editTodo={editTodo} />
+      <Todo clearTodos={clearTodos} list={todoList} addTodo={addTodo} updateTodo={updateTodo} deleteTodo={removeTodo} editTodo={editTodo} />
 
     </div>
   );
